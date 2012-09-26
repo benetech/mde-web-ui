@@ -1,0 +1,131 @@
+{
+    "data": [
+        {
+            "shapeType": "Cartesian Coordinates",
+            "equations": [
+                {
+                    "equation": "x = c",
+                    "shape": "vertical line"
+                },
+                {
+                    "equation": "y = c",
+                    "shape": "horizontal line"
+                },
+                {
+                    "equation": "y = x",
+                    "shape": "line"
+                },
+                {
+                    "equation": "y = mx + b",
+                    "shape": "line"
+                },
+                {
+                    "equation": "y = ax^2 + b",
+                    "shape": "parabola"
+                },
+                {
+                    "equation": "y-k = (x-h)^2/(4c)",
+                    "shape": "parabola"
+                },
+                {
+                	"equation": "x^2 + y^2 = c",
+                	"shape": "circle"
+                },
+                {
+                    "equation": "x^2/a^2 + y^2/b^2 = 1",
+                    "shape": "circle/ellipse"
+                },
+                {
+                    "equation": "(x-h)^2/a^2 + (y-k)^2/b^2 = 1",
+                    "shape": "Circle/ellipse"
+                },
+                {
+                    "equation": "y = b*(((x+a)/abs(x+a) - (x-a)/abs(x-a)) - 1)",
+                    "shape": "step function"
+                },
+                {
+                	"equation": "x^2 = c",
+                	"shape": "two parallel lines"
+                }, 
+                {
+                	"equation": "(y - mx)^2 = c",
+                	"shape": "two parallel lines"
+                },
+                {
+                    "equation": "y/(1+y) = x^2 - x - 1",
+                    "shape": "function"
+                }
+            ]
+        },
+        {
+            "shapeType": "Trigonometric Functions",
+            "equations": [
+                {
+                    "equation": "y = a * sin(x)",
+                    "shape": "sine function"
+                },
+                {
+                	"equation": "y = a * cos(x)",
+                	"shape": "cosine function"
+                },
+                {
+                	"equation": "y = a * tan(x)",
+                	"shape": "tangent function"
+                },
+                {
+                	"equation": "y = sec(x)",
+                	"shape": "secant function"
+                },
+                {
+                	"equation": "y = csc(x)",
+                	"shape": "cosecant function"
+                },
+                {
+                	"equation": "y = cot(x)",
+                	"shape": "cotangent function"
+                },
+                {
+                	"equation": "y = asec(x)",
+                	"shape": "inverse secant function"
+                },
+                {
+                	"equation": "y = acsc(x)",
+                	"shape": "inverse cosecant function"
+                },
+                {
+                	"equation": "y = acot(x)",
+                	"shape": "inverse cotangent"
+                }
+            ]
+        },
+        {
+        	"shapeType": "Polar Coordinates",
+        	"equations": [
+        		{
+        			"equation": "r = a",
+        			"shape": "circle (polar)"
+        		},
+        		{
+        			"equation": "r = sin(a * theta)",
+        			"shape": "polar rose"
+        		},
+        		{
+        			"equation": "r = sin((a/b)*theta)",
+        			"shape": "polar rose"
+        		},
+        		{
+        			"equation": "r = 1-sin(theta)",
+        			"shape": "cardoid"
+        		},
+        		{
+        			"equation": "r = cos(2*theta) - 2*sin(2*theta)",
+        			"shape": "polar rose"
+        		},
+        		{
+        			"equation": "r^2 = 2*a^2*cos(2*theta)",
+        			"shape": "polar lemniscate"
+        		}
+        	]
+        }
+    ]
+}

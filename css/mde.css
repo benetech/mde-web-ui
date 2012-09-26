@@ -1,0 +1,53 @@
+body {
+	position: relative;
+	font-size: small;
+	font-family: Helvetica, Arial, "Lucida Grande", Geneva, sans-serif;
+	color: #333;
+}
+
+#wrap {
+	position: relative;
+	width: 90em;
+	margin: 0 auto 20px auto;
+	text-align: left;
+}
+
+#mathTraxForm {
+	float: left;
+}
+
+#graph {
+	float: right;
+	max-width: 600px;
+	min-width: 600px;
+	min-height: 800px;
+}
+
+#graph fieldset {
+	border: none;
+}
+
+#generatedSVG {
+	height: 800px;
+	width: 600px;
+}
+
+.hideMe {
+	visibility: hidden;
+}
+
+.button {
+    font: bold 11px Arial;
+    text-decoration: none;
+    background-color: #EEEEEE;
+    color: #333333;
+    padding: 2px 6px 2px 6px;
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #CCCCCC;
+   }
+
+   .parameter {
+   		padding-right: 5px;
+   }

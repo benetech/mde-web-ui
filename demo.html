@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>MDE-Web-Service Example</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<link rel="stylesheet" type="text/css" href="css/mde.css" media="screen" />
+
+<script type="text/javascript" src="js/jquery-latest.min.js"></script>
+<script type="text/javascript" src="js/jquery.printElement.min.js"></script>
+<script type="text/javascript" src="js/demo.js"></script>
+
+</head>
+
+<body>
+	<div id="wrap">
+		<h1 tabindex="-1" accesskey="1">Web Math Trax</h1>
+		<div id="mathTraxForm">
+			<form action="" id="equationForm">
+			<fieldset>
+				<legend>Graph By Shape Equation</legend>
+				<label for="equation">Equation Selector:</label> 
+				<select id="equation" name="equation">
+					<option value="">Please Enter an Equation</option>
+				</select>
+				<fieldset id="equationParameters">
+					<legend>Equation Parameters</legend>
+				</fieldset>
+			</fieldset>
+			<br />
+			<fieldset id="graphDescription">
+				<legend>Graph Description</legend>
+				<p tabindex="-1" id="equationP">Equation: <span id="selectedEquation"></span></p>
+				<p>
+					Description:<br />
+					<textarea cols="60" rows="10" id="equationDescription" tabindex="-1"></textarea>
+				</p>
+			</fieldset>
+			</form><br />
+
+			<div id="printOptions">
+				<a id="printGraph" href="" class="button">Print Graph</a>
+				<a id="printDescription" href="" class="button">Print Description</a>
+				<a id="saveGraph" href="" class="button">Save Graph</a>
+			</div>
+		</div>
+		<div id="graph">
+			<fieldset>
+				<legend>Graph</legend>				
+				<div id='svgGraph'></div>
+			</fieldset>
+		</div>
+	</div>
+</body>
+</html>
