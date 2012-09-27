@@ -1,7 +1,7 @@
 
-var saveGraphURL = "http://math1.qa.bookshare.org/GetEquationDescription?responseFormat=svgFile&equation=";
-var getEquationDescriptionURL = "http://math1.qa.bookshare.org/GetEquationDescription?responseFormat=jsonp&equation=";
-var getNewEquationURL = "http://math1.qa.bookshare.org/GetNewEquation?responseFormat=jsonp&equation=";
+var saveGraphURL = "http://math1.staging.bookshare.org/GetEquationDescription?responseFormat=svgFile&equation=";
+var getEquationDescriptionURL = "http://math1.staging.bookshare.org/GetEquationDescription?responseFormat=jsonp&equation=";
+var getNewEquationURL = "http://math1.staging.bookshare.org/GetNewEquation?responseFormat=jsonp&equation=";
 
 function initEquationSelector() {
 	$("#equationParameters").hide();
@@ -16,6 +16,7 @@ function bindEquationSelector() {
 	$("#equation").change(function() {
 		if ($(this).val() != "") {
 			//Clean up from past call.
+			cleanUpParameters();
 			cleanUp();
 			callWebService($(this).val());
 		} else {
@@ -51,16 +52,18 @@ function getNewEquation() {
 }
 
 function newEquation(json) {
-	$("#graphDescription").hide();
-	cleanUpPrintOptions();
-	cleanUpGraph();
+	cleanUp();
 	callWebService(json.equation);
 }
 
-function cleanUp() {
+function cleanUpParameters() {
 	$("#equationParameters").find("input").remove();
 	$("#equationParameters").find("label").remove();
 	$("#equationParameters").hide();
+	$("#equationForm").unbind("submit");
+}
+
+function cleanUp() {
 	$("#graphDescription").hide();
 	cleanUpPrintOptions();
 	$("#printOptions").hide();
@@ -148,7 +151,7 @@ function outputParameterFields(parameters) {
 		$("#equationParameters").append(getLabel(this));
 		$("#equationParameters").append(getInputField(this));
 	});
-	$("#equationParameters").append($("<input type=\"submit\" value=\"Update Description\" id=\"getNewEquation\" class=\"hideMe\" />"));
+	$("#equationParameters").append($("<input type=\"submit\" value=\"Recalculate\" id=\"getNewEquation\" />"));
 	bindParameterFields();
 }
 
