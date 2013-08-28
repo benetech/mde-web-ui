@@ -1,11 +1,8 @@
 
-//var saveGraphURL = "http://math1.staging.bookshare.org/GetEquationDescription?responseFormat=svgFile&equation=";
-//var getEquationDescriptionURL = "http://math1.staging.bookshare.org/GetEquationDescription?responseFormat=jsonp&equation=";
-//var getNewEquationURL = "http://math1.staging.bookshare.org/GetNewEquation?responseFormat=jsonp&equation=";
+var saveGraphURL = "http://math1.staging.bookshare.org/GetEquationDescription?responseFormat=svgFile&equation=";
+var getEquationDescriptionURL = "http://math1.staging.bookshare.org/GetEquationDescription?responseFormat=jsonp&equation=";
+var getNewEquationURL = "http://math1.staging.bookshare.org/GetNewEquation?responseFormat=jsonp&equation=";
 
-var saveGraphURL = "http://localhost:8080/MDE-Web-Service/GetEquationDescription?responseFormat=svgFile&equation=";
-var getEquationDescriptionURL = "http://localhost:8080/MDE-Web-Service/GetEquationDescription?responseFormat=jsonp&equation=";
-var getNewEquationURL = "http://localhost:8080/MDE-Web-Service/GetNewEquation?responseFormat=jsonp&equation=";
 
 function initEquationSelector() {
 	$("#equationOptions").hide();
