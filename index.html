@@ -23,9 +23,19 @@
 				<select id="equation" name="equation">
 					<option value="">Please Enter an Equation</option>
 				</select>
-				<fieldset id="equationParameters">
-					<legend>Equation Parameters</legend>
-				</fieldset>
+				<div id="equationOptions">
+					<fieldset id="equationParameters">
+						<legend>Equation Parameters</legend>
+					</fieldset>
+					<fieldset id="bounds">
+						<legend>Graph Bounds</legend>
+						<label for="left">Left:</label><input type="text" size="4" name="left" id="left" value="-10" />
+						<label for="right">Right:</label><input type="text" size="4" name="right" id="right" value="10" />
+						<label for="top">Top:</label><input type="text" size="4" name="top" id="top" value="10" />
+						<label for="bottom">Bottom:</label><input type="text" size="4" name="bottom" id="bottom" value="-10"/>
+					</fieldset><br />
+					<input type="submit" value="Recalculate" id="getNewEquation" class="button" />
+				</div>
 			</fieldset>
 			<br />
 			<fieldset id="graphDescription">

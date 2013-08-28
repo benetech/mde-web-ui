@@ -1,10 +1,14 @@
 
-var saveGraphURL = "http://math1.staging.bookshare.org/GetEquationDescription?responseFormat=svgFile&equation=";
-var getEquationDescriptionURL = "http://math1.staging.bookshare.org/GetEquationDescription?responseFormat=jsonp&equation=";
-var getNewEquationURL = "http://math1.staging.bookshare.org/GetNewEquation?responseFormat=jsonp&equation=";
+//var saveGraphURL = "http://math1.staging.bookshare.org/GetEquationDescription?responseFormat=svgFile&equation=";
+//var getEquationDescriptionURL = "http://math1.staging.bookshare.org/GetEquationDescription?responseFormat=jsonp&equation=";
+//var getNewEquationURL = "http://math1.staging.bookshare.org/GetNewEquation?responseFormat=jsonp&equation=";
+
+var saveGraphURL = "http://localhost:8080/MDE-Web-Service/GetEquationDescription?responseFormat=svgFile&equation=";
+var getEquationDescriptionURL = "http://localhost:8080/MDE-Web-Service/GetEquationDescription?responseFormat=jsonp&equation=";
+var getNewEquationURL = "http://localhost:8080/MDE-Web-Service/GetNewEquation?responseFormat=jsonp&equation=";
 
 function initEquationSelector() {
-	$("#equationParameters").hide();
+	$("#equationOptions").hide();
 	$("#graphDescription").hide();
 	$("#printOptions").hide();
 	$("#graph").hide();
@@ -15,9 +19,6 @@ function initEquationSelector() {
 function bindEquationSelector() {
 	$("#equation").change(function() {
 		if ($(this).val() != "") {
-			//Clean up from past call.
-			cleanUpParameters();
-			cleanUp();
 			callWebService($(this).val());
 		} else {
 			alert("Please enter an equation.");
@@ -26,11 +27,21 @@ function bindEquationSelector() {
 }
 
 function callWebService(equation) {
+	//Clean up from past call.
+	cleanUpParameters();
+	cleanUp();
+	
 	//Call webservice for description.
+	var paramQuery = "";
+	paramQuery = paramQuery + "&left=" + $("#left").val();
+	paramQuery = paramQuery + "&right=" + $("#right").val();
+	paramQuery = paramQuery + "&top=" + $("#top").val();
+	paramQuery = paramQuery + "&bottom=" + $("#bottom").val();
+	
 	$.ajax({
 		type: "GET",
 		crossDomain: true,
-		url: getEquationDescriptionURL + encodeURIComponent(equation),
+		url: getEquationDescriptionURL + encodeURIComponent(equation) + paramQuery,
 		dataType: 'jsonp'
 	});
 }
@@ -139,9 +150,11 @@ function outputSVGGraph(svg) {
 }
 
 function outputEquationDescription(json) {
+	$("#equationOptions").show();
 	$("#graphDescription").show();
 	$("#selectedEquation").text(json.equation);
 	$("#equationDescription").val(json.description);
+	bindParameterFields();
 }
 
 function outputParameterFields(parameters) {
@@ -151,14 +164,17 @@ function outputParameterFields(parameters) {
 		$("#equationParameters").append(getLabel(this));
 		$("#equationParameters").append(getInputField(this));
 	});
-	$("#equationParameters").append($("<input type=\"submit\" value=\"Recalculate\" id=\"getNewEquation\" />"));
-	bindParameterFields();
 }
 
 function bindParameterFields() {
 	$("#equationForm").submit(function(event) {
 		event.preventDefault();
-		getNewEquation();
+		if ($(".parameter").length > 0) {
+			getNewEquation();
+		} else {
+			callWebService($("#equation").val());
+		}
+		return false;
 	});
 }
 
