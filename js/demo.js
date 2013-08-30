@@ -1,8 +1,11 @@
 
-var saveGraphURL = "http://math1.staging.bookshare.org/GetEquationDescription?responseFormat=svgFile&equation=";
-var getEquationDescriptionURL = "http://math1.staging.bookshare.org/GetEquationDescription?responseFormat=jsonp&equation=";
-var getNewEquationURL = "http://math1.staging.bookshare.org/GetNewEquation?responseFormat=jsonp&equation=";
-
+//var saveGraphURL = "http://math1.staging.bookshare.org/GetEquationDescription?responseFormat=svgFile&equation=";
+//var getEquationDescriptionURL = "http://math1.staging.bookshare.org/GetEquationDescription?responseFormat=jsonp&equation=";
+//var getNewEquationURL = "http://math1.staging.bookshare.org/GetNewEquation?responseFormat=jsonp&equation=";
+var INVALID_BOUNDS_MESSAGE = "Invalid graph bounds. Please enter values so that left is less than right and bottom is less than top.";
+var saveGraphURL = "http://localhost:8080/MDE-Web-Service/GetEquationDescription?responseFormat=svgFile&equation=";
+var getEquationDescriptionURL = "http://localhost:8080/MDE-Web-Service/GetEquationDescription?responseFormat=jsonp&equation=";
+var getNewEquationURL = "http://localhost:8080/MDE-Web-Service/GetNewEquation?responseFormat=jsonp&equation=";
 
 function initEquationSelector() {
 	$("#equationOptions").hide();
@@ -11,21 +14,26 @@ function initEquationSelector() {
 	$("#graph").hide();
 	populateEquationSelector();	
 	bindEquationSelector();
+	bindParameterFields();
 }
 
 function bindEquationSelector() {
 	$("#equation").change(function() {
-		if ($(this).val() != "") {
-			callWebService($(this).val());
+		if (validateBounds()) {
+			if ($(this).val() != "") {
+				cleanUpParameters();
+				callWebService($(this).val());
+			} else {
+				alert("Please enter an equation.");
+			}
 		} else {
-			alert("Please enter an equation.");
+			alert(INVALID_BOUNDS_MESSAGE);
 		}
 	});
 }
 
 function callWebService(equation) {
 	//Clean up from past call.
-	cleanUpParameters();
 	cleanUp();
 	
 	//Call webservice for description.
@@ -59,6 +67,13 @@ function getNewEquation() {
 	});
 }
 
+function validateBounds() {
+	if (parseFloat($("#left").val()) < parseFloat($("#right").val()) && parseFloat($("#bottom").val()) < parseFloat($("#top").val())) {
+		return true;
+	}
+	return false;
+}
+
 function newEquation(json) {
 	cleanUp();
 	callWebService(json.equation);
@@ -68,11 +83,11 @@ function cleanUpParameters() {
 	$("#equationParameters").find("input").remove();
 	$("#equationParameters").find("label").remove();
 	$("#equationParameters").hide();
-	$("#equationForm").unbind("submit");
 }
 
 function cleanUp() {
 	$("#graphDescription").hide();
+	$("#getNewEquation").hide();
 	cleanUpPrintOptions();
 	$("#printOptions").hide();
 	cleanUpGraph();
@@ -90,6 +105,7 @@ function cleanUpGraph() {
 }
 
 function updateEquationDescription(json) {
+	$("#getNewEquation").show();
 	var description = json.description;
 	if (typeof description.parameters != "undefined") {
 		outputParameterFields(description.parameters);
@@ -151,7 +167,6 @@ function outputEquationDescription(json) {
 	$("#graphDescription").show();
 	$("#selectedEquation").text(json.equation);
 	$("#equationDescription").val(json.description);
-	bindParameterFields();
 }
 
 function outputParameterFields(parameters) {
@@ -166,10 +181,14 @@ function outputParameterFields(parameters) {
 function bindParameterFields() {
 	$("#equationForm").submit(function(event) {
 		event.preventDefault();
-		if ($(".parameter").length > 0) {
-			getNewEquation();
+		if (validateBounds()) {
+			if ($(".parameter").length > 0) {
+				getNewEquation();
+			} else {
+				callWebService($("#equation").val());
+			}
 		} else {
-			callWebService($("#equation").val());
+			alert(INVALID_BOUNDS_MESSAGE);
 		}
 		return false;
 	});
