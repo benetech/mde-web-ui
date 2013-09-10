@@ -18,6 +18,13 @@ function bindEquationSelector() {
 	$("#equation").change(function() {
 		if (validateBounds()) {
 			if ($(this).val() != "") {
+				//If it's a circle, hide bounds.
+				var selected = $("option:selected", this);
+				if (selected.parent()[0].id == "Polar Coordinates") {
+					$("#bounds").hide();
+				} else {
+					$("#bounds").show();
+				}
 				cleanUpParameters();
 				callWebService($(this).val());
 			} else {
