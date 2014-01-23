@@ -1,7 +1,11 @@
 
-var saveGraphURL = "http://math1.staging.bookshare.org/GetEquationDescription?responseFormat=svgFile&equation=";
-var getEquationDescriptionURL = "http://math1.staging.bookshare.org/GetEquationDescription?responseFormat=jsonp&equation=";
-var getNewEquationURL = "http://math1.staging.bookshare.org/GetNewEquation?responseFormat=jsonp&equation=";
+var webServiceDomainUrlDev = "http://localhost:8080/MDE-Web-Service/";
+var webServiceDomainUrlStaging = "http://math1.staging.bookshare.org/";
+//Change below based on where you are.
+var domainUrl = webServiceDomainUrlStaging;
+var saveGraphURL = domainUrl + "GetEquationDescription?responseFormat=svgFile&equation=";
+var getEquationDescriptionURL = domainUrl + "GetEquationDescription?responseFormat=jsonp&equation=";
+var getNewEquationURL = domainUrl + "GetNewEquation?responseFormat=jsonp&equation=";
 var INVALID_BOUNDS_MESSAGE = "Invalid graph bounds. Please enter values so that left is less than right and bottom is less than top.";
 
 function initEquationSelector() {
